@@ -1,4 +1,6 @@
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
+import { nprogress } from '@mantine/nprogress';
+import { useEffect } from 'react';
 import {
   isRouteErrorResponse,
   Links,
@@ -6,6 +8,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from 'react-router';
 
 import type { Route } from './+types/root';
@@ -45,6 +48,20 @@ export function Layout({ children }: { children: React.ReactNode }): React.React
   );
 }
 
+export function HydrateFallback(): null {
+  useEffect(() => {
+    const tid = setTimeout(() => {
+      nprogress.start();
+    }, 1000);
+    return (): void => {
+      clearTimeout(tid);
+      nprogress.complete();
+    };
+  }, []);
+
+  return null;
+}
+
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps): React.ReactElement {
   let message = 'Oops!';
   let details = 'An unexpected error occurred.';
@@ -74,5 +91,22 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps): React.ReactE
 }
 
 export default function App(): React.ReactElement {
+  const navigation = useNavigation();
+  useEffect(() => {
+    let tid: ReturnType<typeof setTimeout> | null = null;
+    if (navigation.state === 'idle') {
+      nprogress.complete();
+    } else {
+      tid = setTimeout(() => {
+        nprogress.start();
+      }, 1000);
+    }
+    return (): void => {
+      if (tid != null) {
+        clearTimeout(tid);
+      }
+    };
+  }, [navigation.state]);
+
   return <Outlet />;
 }
