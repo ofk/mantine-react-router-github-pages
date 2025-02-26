@@ -1,4 +1,7 @@
+import { Anchor, Text, Title } from '@mantine/core';
 import { Link } from 'react-router';
+
+import { AppLayout } from '~/components/AppLayout';
 
 import type { Route } from './+types/about';
 
@@ -6,13 +9,15 @@ export const meta: Route.MetaFunction = () => [{ title: 'About | New React Route
 
 export default function About(): React.ReactElement {
   return (
-    <div className="p-4">
-      <h1 className="text-4xl">About</h1>
-      <p>
-        <Link className="text-blue-600" to="/">
+    <AppLayout>
+      <Title mb="xs" order={1}>
+        About
+      </Title>
+      <Text mb="xs">
+        <Anchor component={Link} to="/">
           Welcome
-        </Link>
-      </p>
-    </div>
+        </Anchor>
+      </Text>
+    </AppLayout>
   );
 }
