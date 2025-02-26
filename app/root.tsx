@@ -13,6 +13,8 @@ import type { Route } from './+types/root';
 import { RootProvider } from './components/RootProvider';
 
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import '@mantine/nprogress/styles.css';
 import './app.css';
 
 export const links: Route.LinksFunction = () => [
