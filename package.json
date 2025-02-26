@@ -11,6 +11,8 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@mantine/core": "^7.17.0",
+    "@mantine/hooks": "^7.17.0",
     "@react-router/fs-routes": "^7.2.0",
     "@react-router/node": "^7.2.0",
     "@react-router/serve": "^7.2.0",
@@ -28,6 +30,9 @@
     "@types/react-dom": "^19.0.1",
     "eslint": "^9.21.0",
     "eslint-import-resolver-typescript": "^3.8.3",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
     "prettier": "^3.5.2",
     "prettier-package-json": "^2.8.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
